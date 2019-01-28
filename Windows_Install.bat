@@ -28,10 +28,10 @@ if '%errorlevel%' NEQ '0' (
     CD /D "%~dp0"
 :-------------------------------------- 
 echo adding cores symlink
-rmdir "C:\Program Files (x86)\Arduino\hardware\teensy\avr\cores"
+rmdir /S /Q "C:\Program Files (x86)\Arduino\hardware\teensy\avr\cores"
 mklink /D "C:\Program Files (x86)\Arduino\hardware\teensy\avr\cores" "%~dp0cores"
 echo adding boards symlink
-rm "C:\Program Files (x86)\Arduino\hardware\teensy\avr\boards.txt"
+del "C:\Program Files (x86)\Arduino\hardware\teensy\avr\boards.txt"
 mklink "C:\Program Files (x86)\Arduino\hardware\teensy\avr\boards.txt" "%~dp0boards.txt" 
 pause
 
