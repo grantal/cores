@@ -109,6 +109,10 @@ static uint8_t device_descriptor[] = {
 #endif
         1,                                      // iManufacturer
         2,                                      // iProduct
+
+#ifdef SERIAL_INDEX 
+        SERIAL_INDEX,                           // iSerialNumber
+#else
         3,                                      // iSerialNumber
         1                                       // bNumConfigurations
 };
@@ -349,6 +353,80 @@ static uint8_t joystick_report_desc[] = {
 };
 #endif // JOYSTICK_SIZE
 #endif // JOYSTICK_INTERFACE
+
+#ifdef SWITCH_INTERFACE
+
+static uint8_t joystick_report_desc[] = {
+        0x05, 0x01,                     // Usage Page (Generic Desktop)
+        0x09, 0x05,                     // Usage (Gamepad)
+        0xA1, 0x01,                     // Collection (Application)
+        0x15, 0x00,                     // Logical Minimum (0)
+        0x25, 0x01,                     // Logical Maximum (1)
+        0x35, 0x00,                     // Physical Minimum (0)
+        0x45, 0x01,                     // Physical Maximum (1)
+        0x75, 0x01,                     // Report Size (1)
+        0x95, 0x10,                     // Report Count (16)
+        // 16 buttons of which the switch will use 14
+        0x05, 0x09,                     // Usage Page (Button)
+        0x19, 0x01,                     // Usage Minimum (Button #1)
+        0x29, 0x10,                     // Usage Maximum (Button #16)
+        0x81, 0x02,                     // Input (variable,absolute)
+        // HAT Switch (1 nibble)
+        0x05, 0x01,                     // Usage Page (Generic Desktop)
+        0x25, 0x07,                     // Logical Maximum (7)
+        0x46, 0x3B, 0x01,               // Physical Maximum (315)
+        0x75, 0x04,                     // Report Size (4)
+        0x95, 0x01,                     // Report Count (1)
+        0x65, 0x14,                     // Unit (?)
+        0x09, 0x39,                     // Usage (Hat Switch)
+        0x81, 0x42,                     // Input ()
+
+        0xA1, 0x00,                     // Collection ()
+        0x15, 0x00,                     // Logical Minimum (0)
+        0x27, 0xFF, 0xFF, 0, 0,         // Logical Maximum (65535)
+        0x75, 0x10,                     // Report Size (16)
+        0x95, 23,                       // Report Count (23)
+        0x09, 0x30,                     // Usage (X)
+        0x09, 0x31,                     // Usage (Y)
+        0x09, 0x32,                     // Usage (Z)
+        0x09, 0x33,                     // Usage (Rx)
+        0x09, 0x34,                     // Usage (Ry)
+        0x09, 0x35,                     // Usage (Rz)
+        0x09, 0x36,                     // Usage (Slider)
+        0x09, 0x36,                     // Usage (Slider)
+        0x09, 0x36,                     // Usage (Slider)
+        0x09, 0x36,                     // Usage (Slider)
+        0x09, 0x36,                     // Usage (Slider)
+        0x09, 0x36,                     // Usage (Slider)
+        0x09, 0x36,                     // Usage (Slider)
+        0x09, 0x36,                     // Usage (Slider)
+        0x09, 0x36,                     // Usage (Slider)
+        0x09, 0x36,                     // Usage (Slider)
+        0x09, 0x36,                     // Usage (Slider)
+        0x09, 0x36,                     // Usage (Slider)
+        0x09, 0x36,                     // Usage (Slider)
+        0x09, 0x36,                     // Usage (Slider)
+        0x09, 0x36,                     // Usage (Slider)
+        0x09, 0x36,                     // Usage (Slider)
+        0x09, 0x36,                     // Usage (Slider)
+        0x81, 0x02,                     // Input (variable,absolute)
+        0xC0,                           // End Collection
+        0x15, 0x00,                     // Logical Minimum (0)
+        0x25, 0x07,                     // Logical Maximum (7)
+        0x35, 0x00,                     // Physical Minimum (0)
+        0x46, 0x3B, 0x01,               // Physical Maximum (315)
+        0x75, 0x04,                     // Report Size (4)
+        0x95, 0x04,                     // Report Count (4)
+        0x65, 0x14,                     // Unit (20)
+        0x05, 0x01,                     // Usage Page (Generic Desktop)
+        0x09, 0x39,                     // Usage (Hat switch)
+        0x09, 0x39,                     // Usage (Hat switch)
+        0x09, 0x39,                     // Usage (Hat switch)
+        0x09, 0x39,                     // Usage (Hat switch)
+        0x81, 0x42,                     // Input (variable,absolute,null_state)
+        0xC0                            // End Collection
+};
+#endif // SWITCH_INTERFACE
 
 #ifdef MULTITOUCH_INTERFACE
 // https://forum.pjrc.com/threads/32331-USB-HID-Touchscreen-support-needed

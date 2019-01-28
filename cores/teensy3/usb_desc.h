@@ -883,12 +883,11 @@ let me know?  http://forum.pjrc.com/forums/4-Suggestions-amp-Bug-Reports
   #define SEREMU_RX_ENDPOINT    2
   #define SEREMU_RX_SIZE        32
   #define SEREMU_RX_INTERVAL    2
-  #define JOYSTICK_INTERFACE    0	// Joystick
-  #define JOYSTICK_ENDPOINT     0
-  #define JOYSTICK_SIZE         64	//  12 = normal, 64 = extreme joystick
-  #define JOYSTICK_INTERVAL     5
+  #define SWITCH_INTERFACE      0
   #define ENDPOINT1_CONFIG	ENDPOINT_TRANSMIT_ONLY
   #define ENDPOINT2_CONFIG	ENDPOINT_RECEIVE_ONLY
+  #define BCD_DEVICE            0x0001
+  #define SERIAL_INDEX          0
 #endif
 
 #ifdef USB_DESC_LIST_DEFINE
