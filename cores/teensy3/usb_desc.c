@@ -114,6 +114,7 @@ static uint8_t device_descriptor[] = {
         SERIAL_INDEX,                           // iSerialNumber
 #else
         3,                                      // iSerialNumber
+#endif
         1                                       // bNumConfigurations
 };
 
@@ -385,8 +386,8 @@ static uint8_t joystick_report_desc[] = {
         0x95, 0x01,                     // Report Count (1)
         0x81, 0x01,                     // Input (?)
         // Joystick (4 bytes)
-        0x26, 0xFF, 0x00                // Logical Maximum (255)
-        0x46, 0xFF, 0x00                // Physical Maximum (255)
+        0x26, 0xFF, 0x00,               // Logical Maximum (255)
+        0x46, 0xFF, 0x00,               // Physical Maximum (255)
         0x09, 0x30,                     // Usage (X)
         0x09, 0x31,                     // Usage (Y)
         0x09, 0x32,                     // Usage (Z)
@@ -395,7 +396,7 @@ static uint8_t joystick_report_desc[] = {
         0x95, 0x04,                     // Report Count (4)
         0x81, 0x02,                     // Input (variable,absolute)
         // Vendor Specific (1 byte)
-        0x06, 0x00, 0xFF                // Usage Page (Generic Desktop)
+        0x06, 0x00, 0xFF,               // Usage Page (Generic Desktop)
         0x09, 0x20,                     // Usage (?)
         0x95, 0x01,                     // Report Count (1)
         0x81, 0x02,                     // Input (variable,absolute)
@@ -406,9 +407,6 @@ static uint8_t joystick_report_desc[] = {
 
         0xC0                            // End Collection
 };
-#ifndef JOYSTICK_INTERFACE
-#define JOYSTICK_INTERFACE
-#endif
 #endif // SWITCH_INTERFACE
 
 #ifdef MULTITOUCH_INTERFACE
