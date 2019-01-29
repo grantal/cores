@@ -827,7 +827,6 @@ teensyLC.menu.usb.disable=No USB
 teensyLC.menu.usb.disable.build.usbtype=USB_DISABLED
 teensyLC.menu.usb.switch=Nintendo Switch Controller
 teensyLC.menu.usb.switch.build.usbtype=USB_HID_SWITCH
-teensyLC.menu.usb.switch.fake_serial=teensy_gateway
 
 teensyLC.menu.speed.48=48 MHz
 teensyLC.menu.speed.24=24 MHz
