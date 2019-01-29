@@ -110,8 +110,8 @@ static uint8_t device_descriptor[] = {
         1,                                      // iManufacturer
         2,                                      // iProduct
 
-#ifdef SERIAL_INDEX 
-        SERIAL_INDEX,                           // iSerialNumber
+#ifdef SERIAL_DISABLED 
+        0,                                      // iSerialNumber
 #else
         3,                                      // iSerialNumber
 #endif
@@ -357,7 +357,7 @@ static uint8_t joystick_report_desc[] = {
 
 #ifdef SWITCH_INTERFACE
 
-static uint8_t joystick_report_desc[] = {
+static uint8_t switch_report_desc[] = {
         0x05, 0x01,                     // Usage Page (Generic Desktop)
         0x09, 0x05,                     // Usage (Gamepad)
         0xA1, 0x01,                     // Collection (Application)
@@ -631,9 +631,15 @@ static uint8_t flightsim_report_desc[] = {
 #define MULTITOUCH_INTERFACE_DESC_SIZE	0
 #endif
 
-#define CONFIG_DESC_SIZE		MULTITOUCH_INTERFACE_DESC_POS+MULTITOUCH_INTERFACE_DESC_SIZE
+#define SWITCH_INTERFACE_DESC_POS	MULTITOUCH_INTERFACE_DESC_POS+MULTITOUCH_INTERFACE_DESC_SIZE
+#ifdef  SWITCH_INTERFACE
+#define SWITCH_INTERFACE_DESC_SIZE	9+9+7
+#define SWITCH_HID_DESC_OFFSET	        SWITCH_INTERFACE_DESC_POS+9
+#else
+#define SWITCH_INTERFACE_DESC_SIZE	0
+#endif
 
-
+#define CONFIG_DESC_SIZE		SWITCH_INTERFACE_DESC_POS+SWITCH_INTERFACE_DESC_SIZE
 
 // **************************************************************
 //   USB Configuration
@@ -650,7 +656,11 @@ static uint8_t config_descriptor[CONFIG_DESC_SIZE] = {
         NUM_INTERFACE,                          // bNumInterfaces
         1,                                      // bConfigurationValue
         0,                                      // iConfiguration
+#ifdef SWITCH_INTERFACE
+        0xC0,                                   // bmAttributes (Bus Powered)
+#else
         0xC0,                                   // bmAttributes
+#endif
         50,                                     // bMaxPower
 
 #ifdef CDC_IAD_DESCRIPTOR
@@ -1594,6 +1604,10 @@ const usb_descriptor_list_t usb_descriptor_list[] = {
 #endif
 #ifdef MTP_INTERFACE
 	{0x0304, 0x0409, (const uint8_t *)&usb_string_mtp, 0},
+#endif
+#ifdef SWITCH_INTERFACE
+        {0x2200, SWITCH_INTERFACE, switch_report_desc, sizeof(switch_report_desc)},
+        {0x2100, SWITCH_INTERFACE, config_descriptor+SWITCH_HID_DESC_OFFSET, 9},
 #endif
         {0x0300, 0x0000, (const uint8_t *)&string0, 0},
         {0x0301, 0x0409, (const uint8_t *)&usb_string_manufacturer_name, 0},
