@@ -877,8 +877,8 @@ let me know?  http://forum.pjrc.com/forums/4-Suggestions-amp-Bug-Reports
   #define NUM_USB_BUFFERS	24
   #define NUM_INTERFACE		1
   #define SWITCH_INTERFACE      0
-  #define ENDPOINT1_CONFIG	ENDPOINT_TRANSMIT_ONLY
-  #define ENDPOINT2_CONFIG	ENDPOINT_RECEIVE_ONLY
+  #define ENDPOINT1_CONFIG	ENDPOINT_RECEIVE_ONLY
+  #define ENDPOINT2_CONFIG	ENDPOINT_TRANSMIT_ONLY
   #define BCD_DEVICE            0x0001
   #define SERIAL_DISABLED       0   
 #endif

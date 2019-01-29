@@ -1470,6 +1470,43 @@ static uint8_t config_descriptor[CONFIG_DESC_SIZE] = {
         MULTITOUCH_SIZE, 0,                     // wMaxPacketSize
         1,                                      // bInterval
 #endif // KEYMEDIA_INTERFACE
+
+#ifdef SWITCH_INTERFACE
+        // interface descriptor, reverse engineered by progmem
+        // https://github.com/progmem/Switch-Fightstick/blob/master/HORI_Descriptors
+        9,                                      // bLength
+        2,                                      // bDescriptorType
+        0,                                      // bInterfaceNumber
+        0,                                      // bAlternateSetting
+        2,                                      // bNumEndpoints
+        0x03,                                   // bInterfaceClass (0x03 = HID)
+        0x00,                                   // bInterfaceSubClass
+        0x00,                                   // bInterfaceProtocol
+        0,                                      // iInterface
+        // HID interface descriptor, HID 1.11 spec, section 6.2.1
+        9,                                      // bLength
+        0x21,                                   // bDescriptorType (33)
+        0x11, 0x01,                             // bcdHID (Not sure if correct, should be 1.11)
+        0,                                      // bCountryCode
+        1,                                      // bNumDescriptors
+        0x22,                                   // bDescriptorType (34=Report)
+        LSB(sizeof(switch_report_desc)),      // wDescriptorLength
+        MSB(sizeof(switch_report_desc)),
+        // endpoint descriptor, USB spec 9.6.6, page 269-271, Table 9-13
+        7,                                      // bLength
+        5,                                      // bDescriptorType
+        0x02,                                   // bEndpointAddress (EP 2 OUT)
+        0x03,                                   // bmAttributes (0x03=intr)
+        0x40, 0x00,                             // wMaxPacketSize (64)
+        0x05,                                   // bInterval
+        // IN Endpoint
+        7,                                      // bLength
+        5,                                      // bDescriptorType
+        0x81,                                   // bEndpointAddress (EP 1 IN)
+        0x03,                                   // bmAttributes (0x03=intr)
+        0x40, 0x00,                             // wMaxPacketSize (64)
+        0x05,                                   // bInterval
+#endif // SWITCH_INTERFACE
 };
 
 
