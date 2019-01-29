@@ -63,6 +63,7 @@
 #include "usb_audio.h"
 #include "usb_touch.h"
 #include "usb_undef.h" // do not allow usb_desc.h stuff to leak to user programs
+#include "usb_switch.h"
 
 #include "WCharacter.h"
 #include "WString.h"
