@@ -33,7 +33,7 @@
 
 #include "usb_desc.h"
 
-#if defined(RAWHID_INTERFACE) || defined(SWITCH_INTERFACE)
+#if defined(RAWHID_INTERFACE)
 
 #include <inttypes.h>
 
