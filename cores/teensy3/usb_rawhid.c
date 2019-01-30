@@ -34,7 +34,7 @@
 #include <string.h>    // for memcpy()
 //#include "HardwareSerial.h"
 
-#ifdef RAWHID_INTERFACE // defined by usb_dev.h -> usb_desc.h
+#ifdef RAWHID_INTERFACE || SWITCH_INTERFACE // defined by usb_dev.h -> usb_desc.h
 #if F_CPU >= 20000000
 
 int usb_rawhid_recv(void *buffer, uint32_t timeout)
